@@ -34,7 +34,7 @@ class ExpansionCard extends StatefulWidget {
     this.gif,
     this.backgroundColor,
     this.onExpansionChanged,
-    this.children = const <Widget>[],
+    this.expansionBody,
     this.trailing,
     this.initiallyExpanded = false,
   }) : assert(initiallyExpanded != null),
@@ -58,10 +58,10 @@ class ExpansionCard extends StatefulWidget {
   /// the value false.
   final ValueChanged<bool> onExpansionChanged;
 
-  /// The widgets that are displayed when the tile expands.
   ///
-  /// Typically [ListTile] widgets.
-  final List<Widget> children;
+  /// [Widget] which will be shown when expanded.
+  ///
+  final Widget expansionBody;
 
   /// The color to display behind the sublist when expanded.
   final Color backgroundColor;
@@ -211,7 +211,7 @@ class _ExpansionTileState extends State<ExpansionCard> with SingleTickerProvider
     return AnimatedBuilder(
       animation: _controller.view,
       builder: _buildChildren,
-      child: closed ? null : Column(children: widget.children),
+      child: closed ? null : widget.expansionBody,
     );
 
   }
